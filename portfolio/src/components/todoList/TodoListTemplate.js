@@ -1,0 +1,100 @@
+import React, {useState, useRef, useCallback} from "react";
+
+import TodoListBox from "./TodoListBox";
+import TodoListInsert from "./TodoListInsert";
+import TodoListEdit from './TodoListEdit';
+
+import './css/TodoListCss.scss';
+
+const TodoListTemplate = () => {
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      text: '리액트 기초 알아보기',
+      checked: true,
+    },
+    {
+      id: 2,
+      text: '컴포넌트 스타일링 하기',
+      checked: true,
+    },
+    {
+      id: 3,
+      text: '투두리스트 만들기',
+      checked: false,
+    },
+  ]);
+  const [selectedTodo, setSelectedTodo] = useState(null);
+  const [insertToggle, setInsertToggle] = useState(false);
+
+  const nextId = useRef(4);
+  const onInsertToggle = useCallback(() => {
+    if (selectedTodo) {
+      setSelectedTodo((selectedTodo) => null);
+    }
+    setInsertToggle((prev) => !prev);
+  }, [selectedTodo]);
+
+  const onChangeSelectedTodo = (todo) => {
+    setSelectedTodo((selectedTodo) => todo);
+  };
+
+  const onInsert = useCallback((text) => {
+    const todo = {
+      id: nextId.current,
+      text,
+      checked: false,
+    };
+    setTodos((todos) => todos.concat(todo)); //concat(): 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열 반환
+    nextId.current++; //nextId 1씩 더하기
+  }, []);
+
+  const onRemove = useCallback((id) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  }, []);
+  const onUpdate = useCallback(
+    (id, text) => {
+      onInsertToggle();
+
+      setTodos((todos) =>
+        todos.map((todo) => (todo.id === id ? { ...todo, text } : todo)),
+      );
+    },
+    [onInsertToggle],
+  );
+  const onToggle = useCallback((id) => {
+    setTodos((todos) =>
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
+      ),
+    );
+  }, []);
+
+
+  return (
+    <div className="todolist__wrap">
+      <h1 className="todolist-title">일정관리</h1>
+      {/* props로 todos 데이터 전달 */}
+      <div className="todolist__conent">
+        <TodoListInsert onInsert={onInsert} />
+        <TodoListBox 
+          todos={todos}
+          onToggle={onToggle}
+          onRemove={onRemove}
+          onChangeSelectedTodo={onChangeSelectedTodo}
+          onInsertToggle={onInsertToggle}
+        />
+        {insertToggle && (
+          <TodoListEdit
+            onInsert={onInsert}
+            selectedTodo={selectedTodo}
+            onInsertToggle={onInsertToggle}
+            onUpdate={onUpdate}
+            insertToggle={insertToggle}
+          />
+        )}
+      </div>
+    </div>
+  )
+}
+export default TodoListTemplate;
