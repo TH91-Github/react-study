@@ -1,11 +1,11 @@
 import './App.css';
 
-import ViewComponent from './components/ViewComponent';
+import Todo from './components/todoList/Todo.jsx'
 
 function App() {
   return (
     <div className="App">
-      <ViewComponent />
+      <Todo />
     </div>
   );
 }
