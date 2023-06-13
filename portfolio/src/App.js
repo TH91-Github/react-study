@@ -1,6 +1,6 @@
 import './App.css';
 
-import Todo from './components/todoList/Todo.jsx'
+import Todo from './components/todoList/TodoListTemplate.jsx'
 
 function App() {
   return (

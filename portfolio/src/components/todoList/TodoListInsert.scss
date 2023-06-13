@@ -1,0 +1,19 @@
+.TodoForm {
+  display:flex;
+  position:relative;
+  margin-top:10px;
+  .TodoInput {
+    flex-grow: 1;
+    padding: 5px;
+    border:1px solid #dbdbdb;
+    margin-right:10px;
+  }
+  .TodoSubmit {
+    display:inline-block;
+    flex-shrink: 0;
+    width: 60px;
+    border:1px solid #dbdbdb;
+    background:#fff;
+    cursor:pointer;
+  }
+}

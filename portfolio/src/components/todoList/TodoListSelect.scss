@@ -1,0 +1,13 @@
+.todolist-select {
+  display:flex;
+  .select { 
+    display:inline-block;
+    width: calc((100% - 80px) / 2);
+    margin-left:10px;
+    padding:5px;
+    border:1px solid #dbdbdb;
+    &:first-child {
+      margin-left:0;
+    }
+  }
+}
