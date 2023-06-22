@@ -14,7 +14,6 @@ const TodoListInsert = ({onInsert, todosType, selectType}) => {
     setValue(e.target.value);
   }, [])
   const onSubmit = useCallback((e)=>{
-    console.log(user)
     if(user === '' || value === ''){
       alert("입력을 확인해 주세요")
     }else{
@@ -36,7 +35,7 @@ const TodoListInsert = ({onInsert, todosType, selectType}) => {
       />
       <input 
         className="TodoInput"
-        name="text" 
+        name="text"
         placeholder={`${_type}을 입력하세요`}
         value={value}
         onChange={onChangeValue}

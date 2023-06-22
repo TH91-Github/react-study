@@ -18,12 +18,11 @@ const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove}) => {
       alert("수정 완료");
       setEditUser('');
       setEditText('');
-      onUpDate(todo,editUser,editText)
+      onUpDate(todo,editUser,editText);
     }
     setEditOnOff(!editOnOff)
   },[editOnOff, todo, editUser, editText, onUpDate])
   
-
   return (
     <>
     {

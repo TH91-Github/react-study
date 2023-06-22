@@ -8,32 +8,32 @@ import './TodoListTemplate.scss'
 const data = [
   {
     id: 1,
-    user: '김태훈',
+    user: '이름11',
     listType: '할 일',
     text: '할 일 1번 입니다',
     checked: false,
   },
   {
     id: 2,
-    user: '김태훈2',
+    user: '이름22',
     listType: '할 일',
     text: '할 일 2번 입니다',
     checked: false,
   },
   {
     id: 3,
-    user: '김태훈3',
+    user: '이름33',
     listType: '사고 싶은 것',
     text: '사고 싶은 것1111111',
     checked: false,
   },
   {
     id: 4,
-    user: '김태훈4',
+    user: '이름44',
     listType: '사고 싶은 것',
     text: '사고 싶은 것222222',
     checked: false,
-  },  
+  },
 ]
 const TodoListTemplate = () => {
   const [todos, setTodos] = useState(data);
@@ -44,18 +44,16 @@ const TodoListTemplate = () => {
       ? [...result, listType]
       : result
   }, [])
-  const baseType = [...todosType];
-
   // 목록 추가
   const onInsert = useCallback((user, listType, text) => {
     const todo = {
-        id: `${user}_${Math.random() * 1000}`,
-        user,
-        text,
-        listType,
-        checked: false,
+      id: `${user}_${Math.random() * 1000}`,
+      user,
+      text,
+      listType,
+      checked: false,
     };
-    setTodos(todos.concat(todo)); 
+    setTodos(todos.concat(todo));
   },[todos]);
   
   // 선택된 유저 알림
@@ -91,7 +89,7 @@ const TodoListTemplate = () => {
     <div className="todolist">
       <TodoListSelect
         todos={todos}
-        todosType={baseType}
+        todosType={todosType}
         userChange={userChange}
         selectChange={selectChange}
       />
