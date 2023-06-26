@@ -12,6 +12,7 @@
     padding-left:20px;
     border:none;
     background:transparent;
+    font-size:14px;
     text-align:left;
     &.checked {
       &:before {
@@ -21,9 +22,15 @@
         content:"✅";
       }
     }
+    & span {
+      display:inline-block;
+    }
   }
   .user{
-    margin-right:10px;
+    min-width:100px;
+  }
+  .text { 
+    padding:0 10px;
   }
   .update {
     display:inline-block;
@@ -62,21 +69,26 @@
     }
   }
   .TodoListItem__edit{
+    display:flex;
     position:absolute;
     top:0;
     left:0;
     width:calc(100% - (#{$sizeWH} * 2));
     height:100%;
-    background:#000e4c;
+    padding:0 20px;
     border:1px solid #dbdbdb;
+    background:#000e4c;
+    font-size:14px;
     text-align:left;
-    .TodoInput {
+    box-sizing:border-box;
+    &-input {
+      flex-grow:1;
       position:relative;
-      margin-left:10px;
-      padding-left:10px;
+      padding:0 10px;
       height:100%;
       padding:3px 10px;
       background:transparent;
+      font-size:14px;
       box-sizing:border-box;
       border:none;
       color:#fff;
@@ -86,6 +98,23 @@
       &:first-child {
         margin-left:0;
         border-right:1px solid #dbdbdb;
+      }
+    }
+    &-user {
+      display:inline-block;
+      position: relative;
+      min-width:100px;
+      padding:3px 0;
+      color:#dbdbdb;
+      &::after {
+        display:block;
+        position:absolute;
+        top:0;
+        right:0;
+        width:1px;
+        height:100%;
+        background:#fff;
+        content:"";
       }
     }
   }

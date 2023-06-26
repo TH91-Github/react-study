@@ -1,28 +1,30 @@
 import React, { useCallback, useState } from "react";
 
-import './TodoListItem.scss'
-const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove}) => {
+import './TodoListItem.scss';
+import { regExpChk } from "../../api/regExpChk";
+const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove, editId, editCheck}) => {
   const {user, text, listType, checked } = todo;
-  const [editOnOff, setEditOnOff] = useState(false);
-  const [editUser, setEditUser] = useState('');
+  // const [editOnOff, setEditOnOff] = useState(false);
   const [editText, setEditText] = useState('');
-
-  const onEditUser = useCallback((e) => {
-    setEditUser(e.target.value);
-  },[]) 
   const onEditText = useCallback((e) => {
-    setEditText(e.target.value);
+    setEditText(regExpChk(e.target.value));
   },[])
-  const checkEdit = useCallback(() => {
-    if(editOnOff && editUser !== '' && editText !== ''){
-      alert("수정 완료");
-      setEditUser('');
+  const checkEdit = useCallback((e) => {
+    (editText === '' )
+    ?  editId === e.id 
+      ? editCheck(null)
+      : editCheck(e.id)
+    : editComplete();
+
+    function editComplete(){
+      // alert("수정 완료"); // [Violation] 'click' handler took 1033ms 발생
       setEditText('');
-      onUpDate(todo,editUser,editText);
+      onUpDate(todo,editText)
+      editCheck(null)
     }
-    setEditOnOff(!editOnOff)
-  },[editOnOff, todo, editUser, editText, onUpDate])
-  
+    
+  },[editCheck, todo, editText, onUpDate, editId])
+ 
   return (
     <>
     {
@@ -46,7 +48,7 @@ const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove}) => {
           type="button"
           className="update"
           onClick={() => checkEdit(todo)}>
-          {(editOnOff ? <span>🙆‍♂️</span> : <span>✏️</span>)} 
+          {(editId === todo.id ? <span>🙆‍♂️</span> : <span>✏️</span>)} 
         </button>
         <button
           type="button"
@@ -54,18 +56,13 @@ const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove}) => {
           onClick={() => onRemove(todo)}>
           삭제
         </button>
-        { editOnOff &&
+        { editId === todo.id &&
           <div className="TodoListItem__edit">
+            <span className="TodoListItem__edit-user">
+              {todo.user}
+            </span>
             <input 
-              className="TodoInput"
-              name="user"
-              title="수정할 이름을 입력하세요"
-              placeholder="이름"
-              value={editUser}
-              onChange={onEditUser}
-            />
-            <input 
-              className="TodoInput"
+              className="TodoListItem__edit-input"
               name="text" 
               title={`수정할 ${todosType}을 입력하세요`}
               placeholder={`${todosType}을 입력하세요`}
