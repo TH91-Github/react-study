@@ -1,0 +1,91 @@
+{
+  "todoCategory": [
+    {
+      "id": 1,
+      "category": "할 일"
+    },
+    {
+      "id": 2,
+      "category": "사고 싶은 것"
+    }
+  ],
+  "todoList": [
+    {
+      "id": "ㅠ푸_791.1986408240332",
+      "user": "ㅠ푸",
+      "text": "ㅠ풒",
+      "listType": "할 일",
+      "checked": false
+    },
+    {
+      "id": "퓨ㅜㅍㅠㅜ퓨ㅜ_36.989594674222914",
+      "user": "퓨ㅜㅍㅠㅜ퓨ㅜ",
+      "text": "퓨ㅜ",
+      "listType": "사고 싶은 것",
+      "checked": false
+    },
+    {
+      "id": "ㅎㅇㄹ_187.6026795053194",
+      "user": "ㅎㅇㄹ",
+      "text": "ㅋㅌㅊㅋㅌㅊ",
+      "listType": "할 일",
+      "checked": true
+    },
+    {
+      "id": "ghjghj_13.30777926218274",
+      "user": "ghjghj",
+      "text": "ghjghj",
+      "listType": "할 일",
+      "checked": false
+    },
+    {
+      "id": "hhh_168.65229166295225",
+      "user": "hhh",
+      "text": "hh",
+      "listType": "사고 싶은 것",
+      "checked": false
+    },
+    {
+      "id": "ff_147.19279292266773",
+      "user": "ff",
+      "text": "fff",
+      "listType": "사고 싶은 것",
+      "checked": false
+    },
+    {
+      "id": "zz_441.6397211860861",
+      "user": "zz",
+      "text": "zz",
+      "listType": "사고 싶은 것",
+      "checked": false
+    },
+    {
+      "id": "zxczx_479.3179249784292",
+      "user": "zxczx",
+      "text": "czxc",
+      "listType": "사고 싶은 것",
+      "checked": false
+    },
+    {
+      "id": "dfgdf_667.2194755905716",
+      "user": "dfgdf",
+      "text": "gdfgdfg",
+      "listType": "사고 싶은 것",
+      "checked": false
+    },
+    {
+      "id": "hh_669.8715593412401",
+      "user": "hh",
+      "text": "hh",
+      "listType": "할 일",
+      "checked": false
+    },
+    {
+      "id": "cvbc_169.60606879183038",
+      "user": "cvbc",
+      "text": "vbcvb",
+      "listType": "할 일",
+      "checked": false
+    }
+  ]
+}
