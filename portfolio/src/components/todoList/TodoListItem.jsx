@@ -4,7 +4,6 @@ import './TodoListItem.scss';
 import { regExpChk } from "../../api/regExpChk";
 const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove, editId, editCheck}) => {
   const {user, text, listType, checked } = todo;
-  // const [editOnOff, setEditOnOff] = useState(false);
   const [editText, setEditText] = useState('');
   const onEditText = useCallback((e) => {
     setEditText(regExpChk(e.target.value));
@@ -22,7 +21,6 @@ const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove, editId, ed
       onUpDate(todo,editText)
       editCheck(null)
     }
-    
   },[editCheck, todo, editText, onUpDate, editId])
  
   return (
@@ -32,6 +30,21 @@ const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove, editId, ed
       <li
         className="TodoListItem"
       >
+        { editId === todo.id &&
+          <div className="TodoListItem__edit">
+            <span className="TodoListItem__edit-user">
+              {todo.user}
+            </span>
+            <input 
+              className="TodoListItem__edit-input"
+              name="text" 
+              title={`수정할 ${todosType}을 입력하세요`}
+              placeholder={`${todosType}을 입력하세요`}
+              value={editText}
+              onChange={onEditText}
+            />
+          </div>
+        }
         <button
           type="button"
           className={'checkbox ' + (checked ? 'checked' : '')}
@@ -56,21 +69,6 @@ const TodoListItem = ({todo, todosType, onToggle, onUpDate, onRemove, editId, ed
           onClick={() => onRemove(todo)}>
           삭제
         </button>
-        { editId === todo.id &&
-          <div className="TodoListItem__edit">
-            <span className="TodoListItem__edit-user">
-              {todo.user}
-            </span>
-            <input 
-              className="TodoListItem__edit-input"
-              name="text" 
-              title={`수정할 ${todosType}을 입력하세요`}
-              placeholder={`${todosType}을 입력하세요`}
-              value={editText}
-              onChange={onEditText}
-            />
-          </div>
-        }
       </li>
     }
     </>

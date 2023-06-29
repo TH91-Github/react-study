@@ -3,8 +3,9 @@ import React, { useCallback, useEffect, useState } from "react"
 import TodoListSelect from './TodoListSelect';
 import TodoListInsert from './TodoListInsert';
 import TodoList from './TodoList';
-import { dataFetch, postFetch, toggleFetch, removeFetch }  from "../../api/useFetch";
+import { toggleFetch, removeFetch, loadAxios, postAxios }  from "../../api/apiFetch";
 import './TodoListTemplate.scss'
+
 
 const TodoListTemplate = () => {
   const listLsitKey = "todolist";
@@ -20,26 +21,26 @@ const TodoListTemplate = () => {
   const [error, setError] = useState(null);
 
   // load
-  const loadFetch = useCallback(async()=>{
+  const loadData = useCallback(async()=>{
     setLoading(true);
     try{ 
-      // setTodos(ttt)
-      const data = await dataFetch(SERVER_URL);
-      const category = await dataFetch(`http://localhost:4000/${listCategoryKey}`);
+      const data = await loadAxios(SERVER_URL);
+      const category = await loadAxios(`http://localhost:4000/${listCategoryKey}`);
       setTodos(data);
       setTodosType(category);
+
+      console.log(data)
     }catch(error) {
       setError(error);
-    }
-    finally{ 
+    }finally{ 
       setLoading(false)
     }
   },[SERVER_URL])
 
   useEffect(() => {
     console.log("loading")
-    loadFetch();
-  }, [loadFetch])
+    loadData();
+  }, [loadData])
 
   // 목록 추가
   const onInsert = useCallback((user, listType, text) => {
@@ -50,8 +51,8 @@ const TodoListTemplate = () => {
         listType,
         checked: false,
     };
-    postFetch(SERVER_URL, todo)
-    // .then(()=> loadFetch()) // useState todos로 하기에 불필요하다고 생각.. 바뀌면 전체 리렌더링 - 화면깜빡임
+    postAxios(SERVER_URL, todo)
+    // .then(()=> loadFetch()) // useState todos로 하기에 불필요?. / 바뀌면 전체 리렌더링 - 화면깜빡임
     setTodos(todos.concat(todo)); 
   },[todos, SERVER_URL]);
   
@@ -80,7 +81,7 @@ const TodoListTemplate = () => {
     setTodos(todos.map((todo) => 
       todo.id === listInfo.id ? {...todo, ...editOption } : todo
     ))
-  },[todos])
+  },[todos, SERVER_URL])
   
   // 삭제 
   const onRemove = useCallback((listInfo)=>{

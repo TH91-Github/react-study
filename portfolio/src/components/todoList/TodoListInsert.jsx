@@ -16,25 +16,20 @@ const TodoListInsert = ({todosType, onInsert,  selectType}) => {
     e.preventDefault();
     const userGap = user.replace(/\s+/g, '');
     const valueGap = value.replace(/\s+/g, '');
-    
-    if(user === '' || value === ''){
-      alert("입력을 확인해 주세요")
-    }else{
-      // 빈 값만 있을 경우 체크 kim t h 이름 가능.
-      if(userGap.length === 0){
-        setUser(userGap)
-        alert("이름을 확인해 주세요");
-      }else if(valueGap.length === 0 ){
-        setValue(valueGap)
-        alert("입력을 확인해 주세요");
-      }else {
-        // 앞 뒤 공백 제거
-        setUser(user.trim());
-        setValue(user.trim());
-        onInsert(user, _type, value); // 이름, 할 일 or 사고 싶은 것, 텍스트
-        setUser('');
-        setValue('');
-      }
+    // 빈 값만 있을 경우, 중간 체크 띄어쓰기 : kim t h 이름 가능.
+    if(userGap.length === 0){
+      setUser(userGap)
+      alert("이름을 확인해 주세요");
+    }else if(valueGap.length === 0 ){
+      setValue(valueGap)
+      alert("입력을 확인해 주세요");
+    }else {
+      // 앞 뒤 공백 제거
+      setUser(user.trim());
+      setValue(user.trim());
+      onInsert(user, _type, value); // 이름, 할 일 or 사고 싶은 것, 텍스트
+      setUser('');
+      setValue('');
     }
   },[onInsert, user, _type, value])
 
